@@ -5,6 +5,7 @@
 *.der
 *.pem
 *.cer
+*.crt
 
 !apps/bufferoverflow/src/*
 
@@ -18,6 +19,8 @@ apps/bufferoverflow/src/success/libtom*
 apps/bufferoverflow/results/
 apps/bufferoverflow/out/
 apps/bufferoverflow/test/crsa/libtom*
+
+apps/certsign/owners/owner_info.txt
 
 .venv/
 .env

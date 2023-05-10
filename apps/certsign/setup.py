@@ -26,7 +26,7 @@ owner_list = ["Ariel", "Baloo", "Coco", "Dewey", "Elsa", "Flounder", "Goofy", "H
 #######################
 # Create the server keys and certificate
 #######################
-def gen_keys():
+def gen_root_keys():
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=2048,
@@ -119,7 +119,7 @@ def create_keys(name):
         format=serialization.PublicFormat.SubjectPublicKeyInfo
     )
 
-    with open(f"{KEY_PATH}/{name}-privkey.pem", 'w') as f:
+    with open(f"{KEY_PATH}/{name}-pubkey.pem", 'w') as f:
         f.write(pub_pem.decode())
         f.close()
 
@@ -328,7 +328,7 @@ def create_root_cert():
 
 
 def setup_fresh():
-    gen_keys()
+    gen_root_keys()
     create_root_cert()
 
     make_owner_info()
@@ -337,7 +337,7 @@ def setup_fresh():
 
 
 setup_menu = Menu("Certsign Setup")
-setup_menu.add_option(MenuOption("Generate Server Keys", gen_keys))
+setup_menu.add_option(MenuOption("Generate Server Keys", gen_root_keys))
 setup_menu.add_option(MenuOption("Create New Owner Info", make_owner_info))
 setup_menu.add_option(MenuOption("Generate Owner Keys", key_gen))
 setup_menu.add_option(MenuOption("Create New Owner Certificate Bundles", create_cert_bundles))
